@@ -7,16 +7,11 @@ import requests
 
 import host
 
-# 设置你的刷新令牌
-refresh_token = ('eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9'
-                 '.eyJpc3MiOiJ1c2VyLWNlbnRlciIsImV4cCI6MTcyMTg4ODE5MywiaWF0IjoxNzE0MTEyMTkzLCJqdGkiOiJjb2xrZG'
-                 'diNWNmdWozZzkxZ3NiMCIsInR5cCI6InJlZnJlc2giLCJzdWIiOiJjb2t2c2VqNWNmdWozZ2J0bTJ2MCIsInNwYWNlX2lkIj'
-                 'oiY29rdnNlajVjZnVqM2didG0ydWciLCJhYnN0cmFjdF91c2VyX2lkIjoiY29rdnNlajVjZnVqM2didG0ydTAifQ.T8pIgOdo'
-                 'dEBzDfjyWhnFY4xULodGDKHIHCkQKBJW-b7uV7OVYFX5EQDbfJNXnXYe-5y8mPOG6pexQH-GNpPFmg')
+
 
 # 设置请求头部
 headers = {
-    'Authorization': f'Bearer {refresh_token}'
+    'Authorization': f'Bearer {host.refresh_token}'
 }
 
 import re
@@ -33,7 +28,7 @@ file_path = fr'排行榜\新片\{now}.txt'
 with open(file_path, 'r', encoding='utf-8') as file:
     file_content = file.read()
 
-# 您想要提取的文本部分的起始和结束标记
+# 提取的文本部分的起始和结束标记
 start_marker = 'Start'
 end_marker = 'End'
 
@@ -66,7 +61,6 @@ for i in range(len(extracted_texts)):
         'stream': False  # 是否使用SSE流
     }
 
-    # 发送POST请求到指定的接口，示例URL请替换为实际的API URL
     response = requests.post(host.hostUrl, headers=headers, json=payload)
 
     # 验证响应状态码

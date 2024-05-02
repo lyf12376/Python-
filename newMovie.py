@@ -192,8 +192,8 @@ print(movies)
 with ThreadPoolExecutor(max_workers=10) as executor:
     # 提交所有的任务并收集Future对象
     futures = {executor.submit(fetch_movie_info, movie.get('href')) for movie in movies}
+
     for future in as_completed(futures):
-        # 当一个线程完成时，输出结果
         info, comments = future.result()
         movie_info_text = ""
         print(info)
